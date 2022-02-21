@@ -1,7 +1,18 @@
 {% extends 'layout.html' %} <!--- inheritance --->
-{% block content %} <!--- link displayed --->
-    Tuo punteggio: {{ score_user }}<br><br>
+{% block content %}
+    <!--- print out messages and outcome --->
+    {% for _, row in df.iterrows() %}
+        <!---message--->
+        <b>{{ row.message }}</b>><br>
+        <!---outcome--->
+        {% if row.sender == row.user_pred %}
+            Ben fatto, era proprio {{ row.sender }}<br><br>
+        {% else %}
+            No, pensavi fosse {{ row.user_pred }} ma invece era {{ row.sender }}<br><br>
+        {% endif %}
+    {% endfor %}<br><br>
+    Questo giro hai totalizzato <b>{{ score_user }}</b> punti<br><br>
     Ben fatto coglione!<br><br>
-    Il tuo punteggio finora è: {{ cumul_score_user }}<br><br>
+    Il tuo punteggio finora è: <b>{{ cumul_score_user }}/{{ attempts_counter }}</b><br><br>
     <a href="{{ url_for('index') }}">Riprova</a>
 {% endblock content %}

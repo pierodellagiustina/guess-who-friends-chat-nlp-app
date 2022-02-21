@@ -1,4 +1,4 @@
-NUM_SAMPLES = 2
+NUM_SAMPLES = 5
 
 SENDER_MAPPER_REV = {
     0: 'Enrico Mattiazzi',
