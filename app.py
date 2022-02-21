@@ -1,13 +1,12 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import pandas as pd
-import joblib
 import functionalities.functionalities as f
 import config.config as c
 import json
 
 # Initialize app
 app = Flask(__name__)
-app.secret_key = 'gruppotelegram'
+app.secret_key = 'gruppotelegram2'
 
 
 # home page
@@ -40,9 +39,6 @@ def index():
     sender_mapper = c.SENDER_MAPPER_REV
     cumul_score_user = session['cumul_score_user']
     attempts_counter = session['attempts_counter']
-
-
-    print(df)
 
     if request.method == 'GET':  # request.method will tell me if it is a GET or POST request
         # Welcome page
@@ -107,3 +103,4 @@ if __name__ == '__main__':
 
 # todo: change pictures
 # todo: bring in the model estimates
+# todo: user input validation
