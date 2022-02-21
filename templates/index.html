@@ -1,0 +1,23 @@
+{% extends 'layout.html' %} <!--- inheritance --->
+{% block content %} <!--- central block with messages displayed --->
+    <center>
+        <p>
+            Benvenuto<br><br>
+            Qui di seguito ti verranno presentati 5 messaggi presi a caso dalla nostra chat<br><br>
+            Indovina chi sono i mentecatti che hanno scritto sta roba e invia la risposta in fondo<br><br><br><br>
+            Utilizza i seguenti codici identificativi:<br><br>
+            {% for sender_id in sender_mapper.keys() %}
+                <b>{{ sender_mapper[sender_id] }} : {{ sender_id+1 }}</b><br>
+            {% endfor %}
+        </p>
+    </center>
+    <form method="POST">
+        <b><!---Print all the messages that have been passed--->
+            {% for m in messages %}
+                {{ loop.index }}) "{{ m }}"
+                <input type='text' name="answer_{{loop.index}}"><br><br>
+            {% endfor %}
+        </b>
+        <input type="submit" value="Invio">
+    </form>
+{% endblock content %}

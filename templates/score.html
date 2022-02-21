@@ -1,0 +1,7 @@
+{% extends 'layout.html' %} <!--- inheritance --->
+{% block content %} <!--- link displayed --->
+    Tuo punteggio: {{ score_user }}<br><br>
+    Ben fatto coglione!<br><br>
+    Il tuo punteggio finora è: {{ cumul_score_user }}<br><br>
+    <a href="{{ url_for('index') }}">Riprova</a>
+{% endblock content %}
