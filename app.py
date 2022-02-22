@@ -60,7 +60,7 @@ def index():
             # Compute user score
             score_user = f.compute_user_score(user_preds, senders)
             # Update attempts counter
-            session['attempts_counter'] += len(df)  # todo: This should be equal to c.NUM_SAMPLES but not always?
+            session['attempts_counter'] += len(df)
 
             user_preds = json.dumps(user_preds)
 
@@ -70,6 +70,8 @@ def index():
 @app.route('/score/<score_user>/<user_preds>')
 def score(score_user, user_preds):
 
+    user_preds = f.split_user_preds(user_preds,c.NUM_SAMPLES)
+
     # Remap user predictions as names
     user_preds_names = []
     for char in user_preds:
@@ -77,7 +79,7 @@ def score(score_user, user_preds):
             char = int(char)
             user_preds_names.append(c.SENDER_MAPPER_REV[char])
         except:
-            pass
+            user_preds_names.append('err')
     # add score to the cumulative score in the session
     session['cumul_score_user'] += int(score_user)
     # read out the cumulative score

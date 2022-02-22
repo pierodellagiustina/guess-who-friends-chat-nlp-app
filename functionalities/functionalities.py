@@ -35,3 +35,18 @@ def compute_user_score(user_preds, senders):
             score_user += 1
 
     return score_user
+
+
+def split_user_preds(user_preds, num_samples):
+    positions = [pos for pos, char in enumerate(user_preds) if char == '"']
+    for i in chunks(positions,2):
+        user_preds[i[0]:i[1]]
+
+
+
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+
