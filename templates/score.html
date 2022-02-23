@@ -3,7 +3,7 @@
     <!--- print out messages and outcome --->
     {% for _, row in df.iterrows() %}
         <!---message--->
-        <b>{{ row.message }}</b>><br>
+        <b>{{ row.message }}</b><br>
         <!---outcome--->
         {% if row.user_pred == 'err' %}
             Bravo coglione, non sei neanche riuscito ad inserire un carattere valido. In ogni caso il mittente era {{ row.sender }}<br><br>

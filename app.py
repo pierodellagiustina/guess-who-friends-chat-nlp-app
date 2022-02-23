@@ -61,7 +61,7 @@ def index():
             score_user = f.compute_user_score(user_preds, senders)
             # Update attempts counter
             session['attempts_counter'] += len(df)
-
+            # convert to json before passing to redirect
             user_preds = json.dumps(user_preds)
 
             return redirect(url_for('score', score_user=score_user, user_preds=user_preds))
@@ -70,7 +70,8 @@ def index():
 @app.route('/score/<score_user>/<user_preds>')
 def score(score_user, user_preds):
 
-    user_preds = f.split_user_preds(user_preds,c.NUM_SAMPLES)
+    # Split input string and cleanse it
+    user_preds = f.split_user_preds(user_preds, c.NUM_SAMPLES)
 
     # Remap user predictions as names
     user_preds_names = []
@@ -80,29 +81,35 @@ def score(score_user, user_preds):
             user_preds_names.append(c.SENDER_MAPPER_REV[char])
         except:
             user_preds_names.append('err')
+
     # add score to the cumulative score in the session
     session['cumul_score_user'] += int(score_user)
+
     # read out the cumulative score
     cumul_score_user = session['cumul_score_user']
+
     # read out the attempts counter
     attempts_counter = session['attempts_counter']
+
     # read out messages and senders from the session
     df = pd.read_json(session['df'])
+
     # add user predictions as column to the df
     df['user_pred'] = user_preds_names
+
     # erase df (messages selection) from session to ensure it gets refreshed
     session.pop('df')
 
+    # render score page
     return render_template(
         'score.html', score_user=score_user, cumul_score_user=cumul_score_user,
         attempts_counter=attempts_counter,df=df)
 
 
 if __name__ == '__main__':
-    # app.config['df'] = df
     app.run(debug=True)
 
 
 # todo: change pictures
 # todo: bring in the model estimates
-# todo: user input validation
+# todo: fix assert
