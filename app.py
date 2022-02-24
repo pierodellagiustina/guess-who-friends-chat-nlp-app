@@ -143,5 +143,3 @@ def score(score_user, user_preds, score_nn):
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-# todo: change pictures
