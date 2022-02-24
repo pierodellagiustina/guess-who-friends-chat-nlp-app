@@ -3,12 +3,9 @@ import random
 import config.config as c
 
 
-def data_loader(num_samples):
-    """Reads X number of randomly chose rows (messages) from the input file and returns them"""
+def load_data():
     file_name = 'data/test_set.csv'
-    n = sum(1 for line in open(file_name, encoding="utf-8")) - 1
-    skip = sorted(random.sample(range(1, n + 1), n - num_samples))
-    df = pd.read_csv(file_name, skiprows=skip, encoding="utf-8")
+    df = pd.read_csv(file_name)
     return df
 
 

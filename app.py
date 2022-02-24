@@ -8,6 +8,8 @@ import json
 app = Flask(__name__)
 app.secret_key = 'gruppotelegram2'
 
+# load the data
+dataset = f.load_data()
 
 # home page
 @app.route('/', methods=['GET', 'POST'])
@@ -25,7 +27,7 @@ def index():
     # todo: make num_samples dynamic
     if 'df' not in session:
         # randomly select the sample
-        df = f.data_loader(c.NUM_SAMPLES)
+        df = dataset.sample(c.NUM_SAMPLES)
         # turn it into json
         df = df.to_json()
         # add it to session
@@ -112,4 +114,3 @@ if __name__ == '__main__':
 
 # todo: change pictures
 # todo: bring in the model estimates
-# todo: fix assert
