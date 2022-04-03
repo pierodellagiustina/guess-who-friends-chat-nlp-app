@@ -41,7 +41,7 @@ def compute_user_score(user_preds, senders):
         sender_mapper = c.SENDER_MAPPER_REV
         try:
             p = sender_mapper[int(p)]
-            if p == senders[i]:
+            if p == senders.iloc[i]:
                 score_user += 1
         except:
             pass
