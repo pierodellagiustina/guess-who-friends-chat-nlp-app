@@ -5,5 +5,6 @@
 - Created a web app to allow user (my friends) to compete in the guessing game against the NN
 
 Tech used: python, tensorflow, flask
+
 Deployed via Heroku
 
