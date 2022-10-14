@@ -6,7 +6,7 @@
         <b>{{ row.message }}</b><br>
         <!---outcome--->
         {% if row.user_pred == 'err' %}
-            Bravo coglione, non sei neanche riuscito ad inserire un carattere valido. In ogni caso il mittente era {{ row.sender }}
+            Complimenti! Non sei neanche riuscito ad inserire un carattere valido. In ogni caso il mittente era {{ row.sender }}
             e la Rete Neurale avrebbe scelto {{ row.nn_pred }}<br><br>
         {% else %}
             {% if row.sender == row.user_pred %}
@@ -17,7 +17,7 @@
         {% endif %}
     {% endfor %}<br><br>
     Questo giro hai totalizzato <b>{{ score_user }}</b> punti, mentre la Rete Neurale ne ha totalizzati <b>{{ score_nn }}</b><br><br>
-    Ben fatto coglione!<br><br>
+    Ben fatto!<br><br>
     Il tuo punteggio finora è: <b>{{ cumul_score_user }}/{{ attempts_counter }}</b><br>
     mentre quello della Rete Neurale è: <b>{{ cumul_score_nn }}/{{ attempts_counter }}</b><br><br>
     <a href="{{ url_for('index') }}">Riprova</a>
